@@ -11,9 +11,14 @@
    		text-align: left;
    		font-weight: 700;
    	}
+      form{
+         max-width: 460px;
+         margin: 20px auto;
+         padding: 20px;
+      }
    </style>
 </head>
-<body class="gray lighten-4">
+<body class="grey lighten-4">
 	<nav class="white lighten-2">
 		<div class="container">
 			<a href="#" class="brand-logo brand-text">Bongo Pizza</a>
