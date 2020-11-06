@@ -7,11 +7,36 @@
 // 	echo $_GET['ingridients'];
 
 // }
-if(isset($_POST['submit'])){
-	echo $_POST['email'];
-	echo $_POST['title'];
-	echo $_POST['ingridients'];
+// using htmlspecialchars prevents XSS (Cross Sites Scripting) attacks!
 
+if(isset($_POST['submit'])){
+// 	echo htmlspecialchars($_POST['email']);
+// 	echo htmlspecialchars($_POST['title']);
+// 	echo htmlspecialchars($_POST['ingridients']);
+// }
+
+## Basic Validation_1
+//check email 
+	if(empty($_POST['email'])){
+		echo "An email is required<br>";
+	}else{
+		echo htmlspecialchars($_POST['email']);
+	}
+
+	//check title
+
+	if(empty($_POST['title'])){
+		echo "A title is required <br>";
+	}else{
+		echo htmlspecialchars($_POST['email']);
+	}
+	// ckeck ingridients
+	if(empty($_POST['ingridients'])){
+		echo "At least one ingridient is required<br>";
+	}else{
+		echo htmlspecialchars($_POST['email']);
+	}
+//  end of POST checks
 }
 
 ?>
