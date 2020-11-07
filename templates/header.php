@@ -21,9 +21,9 @@
 <body class="grey lighten-4">
 	<nav class="white lighten-2">
 		<div class="container">
-			<a href="#" class="brand-logo brand-text">Bongo Pizza</a>
+			<a href="index.php" class="brand-logo brand-text">Bongo Pizza</a>
 			<ul id="nav-mobile" class="right hide-on-small-and-down">
-				<li><a href="#" class="btn brand z-depth-0">ADD A PIZZA</a></li>
+				<li><a href="add.php" class="btn brand z-depth-0">ADD A PIZZA</a></li>
 			</ul>
 		</div>
 	</nav>

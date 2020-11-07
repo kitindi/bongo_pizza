@@ -1,4 +1,5 @@
 <?php 
+ include('config/db_connect.php');
 
 $email='';
 $title='';
@@ -35,7 +36,7 @@ if(empty($_POST['title'])){
 if(empty($_POST['ingredients'])){
   $errors['ingredients']="Ingredients are required separated by comma! <br>";
   }else{
-  	$ingridients=$_POST['ingredients'];
+  	$ingredients=$_POST['ingredients'];
   	if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $ingredients)){
   		$errors['ingredients']='Ingredients must be a comma separated list';
   	}
@@ -47,9 +48,45 @@ if(empty($_POST['ingredients'])){
   if(array_filter($errors)){
   	// echo "THere are errors in a form";
   }else{
+
+    // escaping mysql injection attacks
+   // $email =mysqli_real_escape_string($conn,$_POST['email']);
+   // $title =mysqli_real_escape_string($conn,$_POST['title']);
+   // $ingredients =mysqli_real_escape_string($conn,$_POST['ingredients']);
+
+   // //create sql string
+
+   // $sql ='INSERT INTO pizzas(title, email, ingredients) VALUES($)';
+
+   // // save to db and check
+
+   // if(mysqli_query($conn,$sql)){
+   //  // success and redirect user back to the home page
+   //    header('location:index.php');
+   // }else{
+   //  //error
+
+   //  echo "query error".mysqli_error($conn);
+   // }
+
+    // Escape user inputs for security
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+$title = mysqli_real_escape_string($conn, $_POST['title']);
+$ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+ 
+// Attempt insert query execution
+$sql = "INSERT INTO pizzas (email, title, ingredients) VALUES ('$email', '$title', '$ingredients')";
+
+if(mysqli_query($conn, $sql)){
+    //echo "Records added successfully.";
+  header('location:index.php');
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+}
+
   	// echo 'form is valid';
 #code to redirect user to the different page
-  	header('location:index.php');
+  
   }
 
  }// End of POST check

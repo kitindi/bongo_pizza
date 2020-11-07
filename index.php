@@ -1,14 +1,6 @@
 <?php 
-//MySQLi or PDO{PHP Data Objects}
-//connect to database using mysqli(databasehost, username,password, databasename)
 
-$conn =mysqli_connect('localhost','bongo','bongo123','bongo_pizza');
-
-//check the connection
-
-if(!$conn){
- echo "Connection error: ".mysqli_connect_error();
-}
+include('config/db_connect.php');
 
 //write query for all pizzas
 
@@ -29,6 +21,8 @@ mysqli_free_result($results);
 mysqli_close($conn);
 
 
+// print_r(explode(',', $pizzas[0]['ingredients']));
+
 
 ?>
 
@@ -39,13 +33,20 @@ mysqli_close($conn);
  <h4 class="center grey-text">Pizzas</h4>
  <div class="container">
  	<div class="row">
- 		<?php foreach ($pizzas as $key => $pizza) {?>
+ 		<?php foreach ($pizzas as $key => $pizza): ?>
 
  			<div class="col s6 md3">
  				<div class="card z-depth-0">
  					<div class="card-content center">
  						<h6><?php echo htmlspecialchars($pizza['title']);?></h6>
- 						<div><?php  echo htmlspecialchars($pizza['ingredients'])?></div>
+ 						<div>
+ 							<ul>
+ 								<?php foreach (explode(',', $pizza['ingredients']) as $ing) : ?>
+ 									<li><?php echo htmlspecialchars($ing); ?></li>
+ 								<?php endforeach; ?>
+ 									
+ 							</ul>
+ 						</div>
  					</div>
  					<div class="card-action right-align">
  					<a href="#" class="brand-text">more info</a>
@@ -54,7 +55,7 @@ mysqli_close($conn);
  				
  			</div>
 
- 		<?php } ?>
+ 		<?php endforeach; ?>
  		
  	</div>
  </div>
